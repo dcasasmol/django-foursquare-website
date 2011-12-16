@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 class BasicQueryForm(forms.Form):
     position = forms.CharField()
 
-    def clean():
+    def clean(self):
         cleaned_data = self.cleaned_data
         ll = cleaned_data['position'].replace(' ', '').split(',')
 
