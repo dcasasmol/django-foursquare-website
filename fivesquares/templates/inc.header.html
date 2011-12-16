@@ -1,0 +1,33 @@
+{% load i18n %}
+<div class="container">
+  <div class="row">
+    <div class="span7 logo">
+      <a href="/" title="{% trans "Home" %}">
+        <img src="{{ STATIC_URL }}img/logo.png"
+             alt="{% trans "Home" %}"/>
+      </a>
+    </div>
+    <div class="span8 offset2">
+      <div class="row">
+        <div class="span2 offset2 social-links">
+          <a href="#" title="{% trans "FourSquare" %}">
+            <img src="{{ STATIC_URL }}img/icon_foursquare.png"
+                 alt="{% trans "FourSquare" %}"/>
+          </a>
+          <a href="#" title="{% trans "Twitter" %}">
+            <img src="{{ STATIC_URL }}img/icon_foursquare.png"
+                 alt="{% trans "Twitter" %}"/>
+          </a>
+          <a href="#" title="{% trans "Facebook" %}">
+            <img src="{{ STATIC_URL }}img/icon_foursquare.png"
+                 alt="{% trans "Facebook" %}"/>
+          </a>
+        </div>
+        <div class="span6 slogan">
+          <h1>"{% trans "Lorem ipsum, lorem ipsum dolor sit amet" %}"</h1>
+          <h1>"{% trans "non massa fermentum!" %}"</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
