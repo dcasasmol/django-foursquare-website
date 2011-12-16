@@ -1,0 +1,36 @@
+{% extends "base/base.html" %}
+
+{% block cssstyles %}
+<link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet"
+      media="all" type="text/css" />
+<link href="{{ STATIC_URL }}css/styles.css" rel="stylesheet"
+      media="all" type="text/css" />
+{% block extracss%}
+{% endblock %}
+{% endblock %}
+
+{% block jsscripts %}
+<script type="text/javascript"
+        src="{{ STATIC_URL }}js/jquery-1.6.2.min.js"></script>
+{% block extrajs %}
+{% endblock %}
+{% endblock %}
+
+{% block bodywrapper %}
+<div id="page-wrapper">
+  <div id="header">
+    {% block header %}
+    {% include "inc.header.html" %}
+    {% endblock %}
+  </div>
+  <div id="content-wrapper">
+    {% block contentbody %}
+    {% endblock %}
+  </div>
+  <div id="footer">
+    {% block footer %}
+    {% include "inc.footer.html" %}
+    {% endblock %}
+  </div>
+</div>
+{% endblock %}
