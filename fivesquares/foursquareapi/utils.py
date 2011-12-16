@@ -2,26 +2,29 @@ import urllib2
 import json
 
 
-def get_ordered_data(url):
-    return order_data(get_data(url))
+def get_ordered_venues(url):
+    return order_data(get_venues(url))
 
 
-def get_data(url):
+def get_venues(url):
     open = urllib2.urlopen(url)
     line = open.readlines()[0]
     data = json.loads(line)
-    return data['response']['venues']
 
+    venues = []
+    for item in data['response']['venues']:
+        address = 'address' in item['location'] and item['location']['address'] or ''
+        phone = 'phone' in item['contact'] and item['contact']['phone'] or ''
+        venue = {'name': item['name'],
+                 'category': item['categories'][0]['name'],
+                 'address': address,
+                 'phone': phone,
+                 'distance': item['location']['distance'],
+                 'checkins': item['stats']['checkinsCount'],
+                 'users': item['stats']['usersCount']}
+        venues.append(venue)
 
-def show_data(mylist, indent=1, level=0):
-    for item in mylist:
-        if isinstance(item, list):
-            show_data(item, indent, level + 1)
-        else:
-            if indent:
-                for tab in range(level):
-                    print "\t"
-            print item
+    return venues
 
 
 def order_data(elements):
@@ -31,18 +34,18 @@ def order_data(elements):
 
 def quicksort(elements, left, right):
     if left < right:
-        pivot = elements[(left + right) / 2]['location']['distance']
+        pivot = elements[(left + right) / 2]['distance']
         l, r = left, right
         while l <= r:
-            while elements[l]['location']['distance'] < pivot:
+            while elements[l]['distance'] < pivot:
                 l += 1
-            while elements[r]['location']['distance'] > pivot:
+            while elements[r]['distance'] > pivot:
                 r -= 1
             if l <= r:
-                (elements[l]['location']['distance'],
-                 elements[r]['location']['distance']) = (
-                     elements[r]['location']['distance'],
-                     elements[l]['location']['distance'])
+                (elements[l]['distance'],
+                 elements[r]['distance']) = (
+                     elements[r]['distance'],
+                     elements[l]['distance'])
                 l += 1
                 r -= 1
         if left < r:
