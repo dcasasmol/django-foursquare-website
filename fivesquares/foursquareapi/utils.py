@@ -2,6 +2,10 @@ import urllib2
 import json
 
 
+def get_ordered_data(url):
+    return order_data(get_data(url))
+
+
 def get_data(url):
     open = urllib2.urlopen(url)
     line = open.readlines()[0]
@@ -21,11 +25,11 @@ def show_data(mylist, indent=1, level=0):
 
 
 def order_data(elements):
-    ordena_quicksort(elements, 0, len(elements) - 1)
+    quicksort(elements, 0, len(elements) - 1)
     return elements
 
 
-def ordena_quicksort(elements, left, right):
+def quicksort(elements, left, right):
     if left < right:
         pivot = elements[(left + right) / 2]['location']['distance']
         l, r = left, right
@@ -42,7 +46,7 @@ def ordena_quicksort(elements, left, right):
                 l += 1
                 r -= 1
         if left < r:
-            ordena_quicksort(elements, left, r)
+            quicksort(elements, left, r)
         if l < right:
-            ordena_quicksort(elements, l, right)
+            quicksort(elements, l, right)
     return elements
