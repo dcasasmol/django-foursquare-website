@@ -1,0 +1,17 @@
+{% load i18n %}
+
+<form action="{% url home %}" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <p class="inputRow">
+      <input class="button" type="submit" value="{% trans "Search" %}" />
+    </p>
+</form>
+
+<ul class="venues">
+  {% for venue in venues %}
+  <li>
+    <p>{{ venue.name }}</p>
+    <p>{{ venue.location.distance }}</p>
+  </li>
+  {% endfor %}
+</ul>
