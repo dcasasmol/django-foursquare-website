@@ -28,28 +28,4 @@ def get_venues(url):
 
 
 def order_data(elements):
-    quicksort(elements, 0, len(elements) - 1)
-    return elements
-
-
-def quicksort(elements, left, right):
-    if left < right:
-        pivot = elements[(left + right) / 2]['distance']
-        l, r = left, right
-        while l <= r:
-            while elements[l]['distance'] < pivot:
-                l += 1
-            while elements[r]['distance'] > pivot:
-                r -= 1
-            if l <= r:
-                (elements[l]['distance'],
-                 elements[r]['distance']) = (
-                     elements[r]['distance'],
-                     elements[l]['distance'])
-                l += 1
-                r -= 1
-        if left < r:
-            quicksort(elements, left, r)
-        if l < right:
-            quicksort(elements, l, right)
-    return elements
+    return sorted(elements, key=lambda item: item['distance'])
