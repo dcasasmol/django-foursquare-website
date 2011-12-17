@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 class BasicQueryForm(forms.Form):
     position = forms.CharField()
     main_categories = forms.MultipleChoiceField(
-        choices=[], widget=forms.CheckboxSelectMultiple())
+        choices=[], widget=forms.CheckboxSelectMultiple(), required=False)
 
     def __init__(self, *args, **kwargs):
         super(BasicQueryForm, self).__init__(*args, **kwargs)
