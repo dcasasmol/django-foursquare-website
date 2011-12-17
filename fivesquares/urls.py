@@ -6,4 +6,5 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', 'foursquareapi.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'', include('social_auth.urls')),
 )

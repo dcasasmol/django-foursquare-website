@@ -6,10 +6,11 @@ from urllib import urlencode
 from django.conf import settings
 
 
-def get_ordered_venues(ll, categories=None):
+def get_ordered_venues(ll, user_oauth=settings.OAUTH_FOURSQUARE,
+                       categories=None):
     request_data = {
         'll': ll,
-        'oauth_token': settings.OAUTH_FOURSQUARE,
+        'oauth_token': user_oauth,
         'v': datetime.now().strftime("%Y%m%d"),
     }
     url = '%s/venues/search?%s' % (

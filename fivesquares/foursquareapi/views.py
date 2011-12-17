@@ -1,8 +1,10 @@
 # Create your views here.
+import json
 from datetime import datetime
 from urllib import urlencode
 
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -10,11 +12,16 @@ from foursquareapi.forms import BasicQueryForm
 from foursquareapi.utils import get_ordered_venues
 
 
+@login_required
 def home(request):
     venues = []
     if request.method == 'POST':
         form = BasicQueryForm(request.POST)
-        venues = get_ordered_venues(form.data['position'])
+        venues = get_ordered_venues(
+            form.data['position'],
+            user_oauth=json.loads(
+                request.user.social_auth.values()[0]['extra_data'])[
+                    'access_token'])
     else:
         form = BasicQueryForm()
 
