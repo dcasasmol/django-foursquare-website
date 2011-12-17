@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'foursquareapi',
+    'social_auth',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -147,5 +148,24 @@ LOGGING = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.contrib.foursquare.FoursquareBackend',
+)
+
+SOCIAL_AUTH_ENABLED_BACKENDS = ('foursquare', )
+
 OAUTH_FOURSQUARE = 'VM0U33ELUKDLX0L3CTOMDQ11431PZHODVJWXTACLE4BGWF2B'
 BASE_FOURSQUARE_URL = 'https://api.foursquare.com/v2'
+
+LOGIN_URL          = '/'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_ERROR_URL    = '/login-error/'
+
+SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
