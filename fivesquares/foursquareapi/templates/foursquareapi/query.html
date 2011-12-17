@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+{% block contentbody %}
+<form action="{% url query %}" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <p class="inputRow">
+      <input class="button" type="submit" value="{% trans "Search" %}" />
+    </p>
+</form>
+
+<ul class="venues">
+  {% for venue in venues %}
+  <li>
+    <p>{{ venue.name }}</p>
+    <p>{{ venue.location.distance }}</p>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
