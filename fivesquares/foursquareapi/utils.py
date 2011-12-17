@@ -1,9 +1,30 @@
+from django.conf import settings
+from datetime import datetime
+from urllib import urlencode
+
 import urllib2
 import json
 
 
-def get_ordered_venues(url):
-    return order_data(get_venues(url))
+def get_ordered_venues(ll, categories=None):
+    request_data = {
+        'll': ll,
+        'oauth_token': settings.OAUTH_FOURSQUARE,
+        'v': datetime.now().strftime("%Y%m%d"),
+    }
+    url = '%s/venues/search?%s' % (
+        settings.BASE_FOURSQUARE_URL, urlencode(request_data))
+    venues = []
+    aux = url
+    if(categories != None):
+        for item in categories:
+            url = aux
+            url = url + '&limit=15&categoryId=' + item
+            venues += get_venues(url)
+
+    else:
+        venues += get_venues(url)
+    return sorted(venues, key=lambda venues: venues['distance'])
 
 
 def get_venues(url):
@@ -15,8 +36,9 @@ def get_venues(url):
     for item in data['response']['venues']:
         address = 'address' in item['location'] and item['location']['address'] or ''
         phone = 'phone' in item['contact'] and item['contact']['phone'] or ''
+        category = 'name' in item['categories'][0] and item['categories'][0]['name'] or ''
         venue = {'name': item['name'],
-                 'category': item['categories'][0]['name'],
+                 'category': category,
                  'address': address,
                  'phone': phone,
                  'distance': item['location']['distance'],
@@ -25,31 +47,3 @@ def get_venues(url):
         venues.append(venue)
 
     return venues
-
-
-def order_data(elements):
-    quicksort(elements, 0, len(elements) - 1)
-    return elements
-
-
-def quicksort(elements, left, right):
-    if left < right:
-        pivot = elements[(left + right) / 2]['distance']
-        l, r = left, right
-        while l <= r:
-            while elements[l]['distance'] < pivot:
-                l += 1
-            while elements[r]['distance'] > pivot:
-                r -= 1
-            if l <= r:
-                (elements[l]['distance'],
-                 elements[r]['distance']) = (
-                     elements[r]['distance'],
-                     elements[l]['distance'])
-                l += 1
-                r -= 1
-        if left < r:
-            quicksort(elements, left, r)
-        if l < right:
-            quicksort(elements, l, right)
-    return elements
