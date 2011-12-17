@@ -1,4 +1,5 @@
 import json
+import re
 from datetime import datetime
 from urllib import urlencode
 from urllib2 import urlopen
@@ -29,10 +30,11 @@ class BasicQueryForm(forms.Form):
         self.fields['main_categories'].choices = categories
 
     def clean(self):
+        isdigit = lambda x: re.search('^-?\d+((\.|,)\d+)?$', x)
         cleaned_data = self.cleaned_data
         ll = cleaned_data['position'].replace(' ', '').split(',')
 
-        if len(ll) != 2 or not ll[0].isdigit() or not ll[1].isdigit():
+        if len(ll) != 2 or not isdigit(ll[0]) or not isdigit(ll[1]):
             raise forms.ValidationError(
                 _('The given position value is not valid'))
         return cleaned_data
