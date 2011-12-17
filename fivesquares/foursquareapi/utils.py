@@ -1,52 +1,49 @@
-import urllib2
 import json
+import urllib2
+from datetime import datetime
+from urllib import urlencode
+
+from django.conf import settings
 
 
-def get_ordered_data(url):
-    return order_data(get_data(url))
+def get_ordered_venues(ll, categories=None):
+    request_data = {
+        'll': ll,
+        'oauth_token': settings.OAUTH_FOURSQUARE,
+        'v': datetime.now().strftime("%Y%m%d"),
+    }
+    url = '%s/venues/search?%s' % (
+        settings.BASE_FOURSQUARE_URL, urlencode(request_data))
+    venues = []
+    aux = url
+    if(categories != None):
+        for item in categories:
+            url = aux
+            url = url + '&limit=15&categoryId=' + item
+            venues += get_venues(url)
+
+    else:
+        venues += get_venues(url)
+    return sorted(venues, key=lambda venues: venues['distance'])
 
 
-def get_data(url):
+def get_venues(url):
     open = urllib2.urlopen(url)
     line = open.readlines()[0]
     data = json.loads(line)
-    return data['response']['venues']
 
+    venues = []
+    for item in data['response']['venues']:
+        address = 'address' in item['location'] and item['location']['address'] or ''
+        phone = 'phone' in item['contact'] and item['contact']['phone'] or ''
+        category = len(item['categories']) > 0 and item['categories'][0]['name'] or ''
+        venue = {'name': item['name'],
+                 'category': category,
+                 'address': address,
+                 'phone': phone,
+                 'distance': item['location']['distance'],
+                 'checkins': item['stats']['checkinsCount'],
+                 'users': item['stats']['usersCount']}
+        venues.append(venue)
 
-def show_data(mylist, indent=1, level=0):
-    for item in mylist:
-        if isinstance(item, list):
-            show_data(item, indent, level + 1)
-        else:
-            if indent:
-                for tab in range(level):
-                    print "\t"
-            print item
-
-
-def order_data(elements):
-    quicksort(elements, 0, len(elements) - 1)
-    return elements
-
-
-def quicksort(elements, left, right):
-    if left < right:
-        pivot = elements[(left + right) / 2]['location']['distance']
-        l, r = left, right
-        while l <= r:
-            while elements[l]['location']['distance'] < pivot:
-                l += 1
-            while elements[r]['location']['distance'] > pivot:
-                r -= 1
-            if l <= r:
-                (elements[l]['location']['distance'],
-                 elements[r]['location']['distance']) = (
-                     elements[r]['location']['distance'],
-                     elements[l]['location']['distance'])
-                l += 1
-                r -= 1
-        if left < r:
-            quicksort(elements, left, r)
-        if l < right:
-            quicksort(elements, l, right)
-    return elements
+    return venues
