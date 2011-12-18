@@ -3,20 +3,67 @@
 
 
 {% block contentbody %}
-<form action="{% url query %}" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <p class="inputRow">
-      <input class="button" type="submit" value="{% trans "Search" %}" />
-    </p>
-</form>
+<div class="container">
+  <div class="row">
+    <div class="span6 form">
+      <form action="{% url home %}" method="post" id="search-form">{% csrf_token %}
+        <fieldset>
+          <div class="search position">
+            <legend>{% trans "¿Donde estás?" %}</legend>
+            <div class="clearfix {% if form.position.errors %} error {% endif %}">
+              <div class="input">
+                {{ form.position }}
+                {% if form.position.errors %}
+                <span class="help-inline">{% trans "Required field" %}</span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="search categories">
+            <legend>{% trans "¿Qué buscas?" %}</legend>
+            <div class="clearfix {% if form.main_categories.errors %} error {% endif %}">
+              <div class="category-title" >
+                <label for="id_categories">{{ form.main_categories.label }}</label>
+              </div>
+              <div class="input">
+                {{ form.main_categories }}
+                {% if form.main_categories.errors %}
+                <span class="help-inline">{% trans "Required field" %}</span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <p class="inputRow">
+            <input class="button" type="submit" value="{% trans "Search" %}" />
+          </p>
+        </fieldset>
+      </form>
+    </div>
+    <div class="span10 results">
+      <div class="row row-results">
+      {% for venue in venues %}
 
-<ul class="venues">
-  {% for venue in venues %}
-  <li>
-    <p>{{ venue.name }}</p>
-    <p>{{ venue.location.distance }}</p>
-  </li>
-  {% endfor %}
-</ul>
-
+        <div class="span5 result-item">
+          <h3>{{ venue.name }}</h3>
+          <p class="address">{{ venue.address}}</p>
+          <p class="phone">{{ venue.phone }}</p>
+          <p class="category">{{ venue.category }}</p>
+          <div class="checkins highlighted-info">
+            <h5>{{ venue.checkins }}</h5>
+            <p>{% trans "Checkins" }</p>
+          </div>
+          <div class="users highlighted-info">
+            <h5>{{ venue.users }}</h5>
+            <p>{% trans "Users" }</p>
+          </div>
+          <div class="distance highlighted-info">
+            <h5>{{ venue.distance }}</h5>
+            <p>{% trans "Metres" }</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
