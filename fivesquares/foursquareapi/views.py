@@ -25,10 +25,11 @@ def query(request):
         form = BasicQueryForm(request.POST)
         if form.is_valid():
             venues = get_ordered_venues(
-                form.data['position'],
+                form.cleaned_data['position'],
                 user_oauth=json.loads(
                     request.user.social_auth.values()[0]['extra_data'])[
-                        'access_token'])
+                        'access_token'],
+                categories=form.cleaned_data['main_categories'])
     else:
         form = BasicQueryForm()
 
