@@ -85,7 +85,7 @@ span {
 }
 .slogan h1 {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 21px;
     color: #e4e4e4;
     text-align: center;
     margin-bottom: 5px;
@@ -231,6 +231,10 @@ fieldset {
     font-weight: bold;
     margin-bottom: 0;
 }
+.result-item .address {
+    margin-bottom: 2px;
+}
+
 .result-item .phone,
 .result-item .category {
     display: inline-block;
@@ -258,15 +262,17 @@ fieldset {
 .distance {
     background-color: #9EFFBB;
     border: 5px solid #455D8A;
-    width: 65px;
-    height: 35px;
+    width: 75px;
+    height: 45px;
+    padding: 0;
 }
 
 .highlighted-info h5 {
-    font-size: 28;
+    font-size: 22px;
     text-align: center;
     color: #e4e4e4;
     font-weight: bold;
+    font-family: Helvetica;
 }
 
 .distance h5 {
@@ -276,7 +282,9 @@ fieldset {
 .highlighted-info p {
     color: #e4e4e4;
     font-weight: bold;
+    text-align: center;
 }
 .distance p {
     color: #455D8A;
 }
+
