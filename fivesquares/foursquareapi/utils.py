@@ -17,7 +17,7 @@ def get_ordered_venues(ll, user_oauth=settings.OAUTH_FOURSQUARE,
         settings.BASE_FOURSQUARE_URL, urlencode(request_data))
     venues = []
     aux = url
-    if(categories != None):
+    if categories:
         for item in categories:
             url = aux
             url = url + '&limit=15&categoryId=' + item
