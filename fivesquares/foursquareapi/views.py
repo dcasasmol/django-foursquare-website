@@ -12,7 +12,6 @@ from foursquareapi.forms import BasicQueryForm
 from foursquareapi.utils import get_ordered_venues
 
 
-@login_required
 def home(request):
     return render_to_response(
         'foursquareapi/index.html', {},
