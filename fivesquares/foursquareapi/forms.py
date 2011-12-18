@@ -10,7 +10,8 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class BasicQueryForm(forms.Form):
-    position = forms.CharField()
+    position = forms.CharField(widget=forms.TextInput(
+            attrs={'placeholder':'Position'}))
     main_categories = forms.MultipleChoiceField(
         choices=[], widget=forms.CheckboxSelectMultiple(), required=False)
 
