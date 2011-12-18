@@ -280,3 +280,20 @@ fieldset {
 .distance p {
     color: #455D8A;
 }
+
+#content-wrapper {
+    position: relative;
+}
+
+#google-maps-location {
+    top: 0px;
+    left: 0px;
+    height: 500px;
+    width: 100%;
+}
+
+#container-form {
+    position: absolute;
+    top: 0px;
+    width: 340px;
+}
