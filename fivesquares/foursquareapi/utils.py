@@ -41,10 +41,13 @@ def get_venues(url):
         venue = {'name': item['name'],
                  'category': category,
                  'address': address,
+                 'lat': item['location']['lat'],
+                 'lng': item['location']['lng'],
                  'phone': phone,
                  'distance': item['location']['distance'],
                  'checkins': item['stats']['checkinsCount'],
-                 'users': item['stats']['usersCount']}
+                 'users': item['stats']['usersCount']
+        }
         venues.append(venue)
 
     return venues
