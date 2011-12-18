@@ -2,7 +2,13 @@
 {% load i18n %}
 
 {% block contentbody %}
-<a href="{% url socialauth_begin "foursquare" %}">
-  <img src="{{STATIC_URL}}img/foursquare-login.png" alt="Login" />
-</a>
+<div class="container">
+  <div class="row">
+    <div class="span16 login">
+      <a href="{% url socialauth_begin "foursquare" %}">
+        <img src="{{STATIC_URL}}img/foursquare-login.png" alt="Login" />
+      </a>
+    </div>
+  </div>
+</div>
 {% endblock %}
