@@ -40,29 +40,34 @@
       </form>
     </div>
     <div class="span10 results">
-      <div class="row row-results">
+      <div class="row">
       {% for venue in venues %}
-
-        <div class="span5 result-item">
-          <h3>{{ venue.name }}</h3>
-          <p class="address">{{ venue.address}}</p>
-          <p class="phone">{{ venue.phone }}</p>
-          <p class="category">{{ venue.category }}</p>
-          <div class="checkins highlighted-info">
-            <h5>{{ venue.checkins }}</h5>
-            <p>{% trans "Checkins" }</p>
-          </div>
-          <div class="users highlighted-info">
-            <h5>{{ venue.users }}</h5>
-            <p>{% trans "Users" }</p>
-          </div>
-          <div class="distance highlighted-info">
-            <h5>{{ venue.distance }}</h5>
-            <p>{% trans "Metres" }</p>
+        {% if forloop.counter == 3 or forloop.counter == 5 or forloop.counter == 7 or forloop.counter == 9 or forloop.counter == 11 or forloop.counter == 13 or forloop.counter == 15 or forloop.counter == 17 or forloop.counter == 19 or forloop.counter == 21 or forloop.counter == 23 or forloop.counter == 25 or forloop.counter == 27 or forloop.counter == 29 %}
+      </div>
+      <div class="row">
+        {% endif %}
+        <div class="span5">
+          <div class="result-item">
+            <h3>{{ venue.name }}</h3>
+            <p class="address">{{ venue.address}}</p>
+            <p class="phone">{{ venue.phone }}</p>
+            <p class="category">{{ venue.category }}</p>
+            <div class="checkins highlighted-info">
+              <h5>{{ venue.checkins }}</h5>
+              <p>{% trans "Checkins" %}</p>
+            </div>
+            <div class="users highlighted-info">
+              <h5>{{ venue.users }}</h5>
+              <p>{% trans "Users" %}</p>
+            </div>
+            <div class="distance highlighted-info">
+              <h5>{{ venue.distance }}</h5>
+              <p>{% trans "Metres" %}</p>
+            </div>
           </div>
         </div>
         {% endfor %}
-      </div>
+    </div>
     </div>
   </div>
 </div>
