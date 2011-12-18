@@ -1,0 +1,266 @@
+
+/* ----- base styles ----- */
+
+html {
+    background-color: #455D8A;
+}
+
+body {
+    background-color: #e4e4e4;
+    font-family: Helvetica, Verdana, Arial, sans-serif;
+    font-size: 90%;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.2em;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    line-height: 1.5em;
+}
+
+a {
+    color: #999999;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #e4e4e4;
+}
+
+a img {
+    border: medium none;
+}
+ul, ol {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3em;
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-weight: normal;
+}
+span {
+    font-size: 10px;
+}
+
+
+/* ----- header and footer styles ----- */
+
+#header {
+    border-bottom: 20px solid #7499D4;
+    background-color: #455D8A;
+    margin-top: 10px;
+}
+
+#footer {
+    background-color: #455D8A;
+    border-top: 5px solid #7499D4;
+}
+.logo {
+    height: 150px;
+}
+
+.social-links {
+    text-align: right;
+}
+.social-links a {
+    display: inline-block;
+    margin-left: 5px;
+}
+.social-links a img {
+    padding: 2px;
+}
+.slogan {
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+.slogan h1 {
+    font-weight: bold;
+    font-size: 18px;
+    color: #e4e4e4;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.info {
+    margin-top: 10px;
+}
+.info a, .info p {
+    color: #e4e4e4;
+    font-weight: bold;
+    font-size: 11px;
+}
+.info p {
+    text-align: right;
+}
+
+/* ----- login page ----- */
+
+.login {
+    margin: 20px 0;
+    text-align: center;
+    padding: 100px 0px;
+    background-color: #7499D4;
+    border-radius: 10px;
+}
+.login a img {
+    box-shadow: 1px 1px 10px #e4e4e4;
+}
+
+
+/* ----- form ----- */
+
+form#search-form {
+    background-color: #7499D4;
+    border-radius: 0px 0px 20px 20px;
+}
+
+fieldset {
+    padding-top: 0;
+}
+
+.search,
+.inputRow {
+    margin: 10px;
+    background-color: #9EFFBB;
+    border-radius: 20px;
+}
+.search.position {
+    padding: 5px;
+}
+.search.categories {
+    padding: 5px 5px 5px 0;
+}
+
+.search legend {
+    padding: 10px;
+    color: #455D8A;
+    font-weight: bold;
+    font-size: 26px;
+    text-align: center;
+}
+
+.search .input {
+    margin: 0;
+    padding: 0 10px;
+}
+.search input {
+    width: 270px;
+}
+
+.search.categories label {
+    float: none;
+    text-align: left;
+}
+
+.search.categories legend,
+.search.categories .input {
+    padding-left: 15px;
+}
+
+.search.categories .category-title {
+    padding: 2px 0px 2px 20px;
+    background-color: #7499D4;
+    border-radius: 0 15px 15px 0;
+}
+.search.categories .category-title label {
+    color: #f9f9f9;
+    font-weight: bold;
+}
+
+.search.categories ul {
+    margin-top: 10px;
+}
+
+.search.categories ul li {
+    display: inline-block;
+    width: 140px;
+    margin-bottom: 2px;
+    vertical-align: top;
+}
+
+.inputRow input{
+    height: 30px;
+    width: 320px;
+    text-align: center;
+    border-radius: 10px;
+    border: 0 none;
+    color: #455D8A;
+}
+
+/* ----- results ----- */
+
+.row-results {
+    margin: 30px 0;
+}
+
+.result-item {
+    background-color: #7499D4;
+    border-radius: 20px;
+    padding: 5px;
+    display: inline-block;
+}
+.result-item h3 {
+    color: #e4e4e4;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.result-item address,
+.result-item phone,
+.result-item category {
+    color: #25324A;
+}
+.result-item phone,
+.result-category {
+    display: inline-block;
+    width: 130px;
+}
+.result-category {
+    background-color: #e4e4e4;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.highlighted-info {
+    display: inline-block;
+    width: 84px;
+    margin: 0, 3px;
+    padding: 5px;
+    background-color: #455D8A;
+    border-radius: 10px;
+}
+
+.distance {
+    background-color: #9EFFBB;
+    border: 5px solid #455D8A;
+    width: 74px;
+}
+
+.highlighted-info h5 {
+    font-size: 28;
+    text-align: center;
+    color: #e4e4e4;
+    font-weight: bold;
+}
+
+.distance h5 {
+    color: #455D8A;
+}
+
+.highlighted-info p {
+    color: #e4e4e4;
+    font-weight: bold;
+}
+.distance p {
+    color: #455D8A;
+}
