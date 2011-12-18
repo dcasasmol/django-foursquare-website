@@ -42,7 +42,7 @@ $(document).ready(function () {
       <form action="{% url query %}" method="post" id="search-form">{% csrf_token %}
         <fieldset>
           <div class="search position">
-            <legend>{% trans "¿Donde estás?" %}</legend>
+            <legend>{% trans "Where are you?" %}</legend>
             <div class="clearfix {% if form.position.errors %} error {% endif %}">
               <div class="input">
                 {{ form.position }}
@@ -53,7 +53,7 @@ $(document).ready(function () {
             </div>
           </div>
           <div class="search categories">
-            <legend>{% trans "¿Qué buscas?" %}</legend>
+            <legend>{% trans "What do you looking for?" %}</legend>
             <div class="clearfix {% if form.main_categories.errors %} error {% endif %}">
               <div class="category-title" >
                 <label for="id_categories">{{ form.main_categories.label }}</label>
@@ -86,8 +86,12 @@ $(document).ready(function () {
         <div class="span5">
           <div class="result-item">
             <h3>{{ venue.name }}</h3>
+            {% if not "http://" in venue.address %}
             <p class="address">{{ venue.address}}</p>
+            {% endif %}
+            {% if not "http://" in venue.phone %}
             <p class="phone">{{ venue.phone }}</p>
+            {% endif %}
             <p class="category">{{ venue.category }}</p>
             <div class="checkins highlighted-info">
               <h5>{{ venue.checkins }}</h5>
