@@ -15,12 +15,13 @@ class BasicQueryForm(forms.Form):
     main_categories = forms.MultipleChoiceField(
         choices=[], widget=forms.CheckboxSelectMultiple(), required=False)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
         super(BasicQueryForm, self).__init__(*args, **kwargs)
 
         # TODO - Generalize this request on the utils.py file
         request_data = {
-            'oauth_token': settings.OAUTH_FOURSQUARE,
+            'oauth_token': json.loads(
+                user.social_auth.values()[0]['extra_data'])['access_token'],
             'v': datetime.now().strftime("%Y%m%d"),
         }
         url = '%s/venues/categories?%s' % (

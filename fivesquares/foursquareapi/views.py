@@ -22,7 +22,7 @@ def home(request):
 def query(request):
     venues = []
     if request.method == 'POST':
-        form = BasicQueryForm(request.POST)
+        form = BasicQueryForm(request.user, request.POST)
         if form.is_valid():
             venues = get_ordered_venues(
                 form.cleaned_data['position'],
@@ -31,7 +31,7 @@ def query(request):
                         'access_token'],
                 categories=form.cleaned_data['main_categories'])
     else:
-        form = BasicQueryForm()
+        form = BasicQueryForm(request.user)
 
     return render_to_response(
         'foursquareapi/query.html', {
