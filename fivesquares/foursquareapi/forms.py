@@ -9,6 +9,9 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 
+GEOCODE_BASE_URL = 'http://maps.googleapis.com/maps/api/geocode/json'
+
+
 class BasicQueryForm(forms.Form):
     position = forms.CharField(widget=forms.TextInput(
             attrs={'placeholder':'Position'}))
@@ -37,6 +40,21 @@ class BasicQueryForm(forms.Form):
         ll = cleaned_data['position'].replace(' ', '').split(',')
 
         if len(ll) != 2 or not isdigit(ll[0]) or not isdigit(ll[1]):
-            raise forms.ValidationError(
-                _('The given position value is not valid'))
+            geocode_data = {
+                'sensor':u'false',
+                'address': cleaned_data['position'],
+            }
+            url = u'%s?%s' % (
+                GEOCODE_BASE_URL,
+                urlencode(dict([k, v.encode('utf-8')]
+                               for k, v in geocode_data.items())))
+            raw_response = ''.join(urlopen(url).readlines())
+            data = json.loads(raw_response)
+            if data["status"] == "OK":
+                location = data['results'][0]["geometry"]["location"]
+                cleaned_data['position'] = '%s,%s' % (location['lat'],
+                                                      location['lng'])
+            else:
+                raise forms.ValidationError(
+                    _('The given position value is not valid'))
         return cleaned_data

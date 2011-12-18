@@ -16,8 +16,8 @@
 
 <script type="text/javascript">
 $(function(){
-   $('#google-maps-location').gmap({ 'center': new google.maps.LatLng({% if form.is_valid %}{{ form.data.position }}{% else %}36.529688,-6.292657{% endif %}), 'zoom': 14 }).bind('init', function(ev, map) {
-$('#google-maps-location').gmap('addMarker', { 'position': '{% if form.is_valid %}{{ form.data.position }}{% else %}36.529688,-6.292657{% endif %}', 'bounds': true, 'icon': new google.maps.MarkerImage('{{ STATIC_URL }}img/here.png') }).click(function() {
+   $('#google-maps-location').gmap({ 'center': new google.maps.LatLng({% if form.is_valid %}{{ form.cleaned_data.position }}{% else %}36.529688,-6.292657{% endif %}), 'zoom': 14 }).bind('init', function(ev, map) {
+$('#google-maps-location').gmap('addMarker', { 'position': '{% if form.is_valid %}{{ form.cleaned_data.position }}{% else %}36.529688,-6.292657{% endif %}', 'bounds': true, 'icon': new google.maps.MarkerImage('{{ STATIC_URL }}img/here.png') }).click(function() {
             $('#google-maps-location').gmap('openInfoWindow', { 'content':
 "<b>You're here!</b>" }, this)});
 
